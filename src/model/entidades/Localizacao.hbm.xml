@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/06/2019 15:29:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.entidades.Localizacao" table="localizacao" catalog="livraria" optimistic-lock="version">
+        <id name="idLocal" type="java.lang.Integer">
+            <column name="idLocal" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="responsavel" class="model.entidades.Responsavel" fetch="select">
+            <column name="id_Responsavel" not-null="true" />
+        </many-to-one>
+        <property name="descricao" type="string">
+            <column name="descricao" not-null="true" />
+        </property>
+        <property name="rua" type="string">
+            <column name="rua" />
+        </property>
+        <property name="bairro" type="string">
+            <column name="bairro" />
+        </property>
+        <property name="cidade" type="string">
+            <column name="cidade" />
+        </property>
+        <property name="numero" type="java.lang.Integer">
+            <column name="numero" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="20" />
+        </property>
+        <set name="bancaLocals" table="banca_local" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_Local" not-null="true" />
+            </key>
+            <one-to-many class="model.entidades.BancaLocal" />
+        </set>
+    </class>
+</hibernate-mapping>

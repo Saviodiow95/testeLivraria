@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/06/2019 15:29:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.entidades.BancaLocal" table="banca_local" catalog="livraria" optimistic-lock="version">
+        <composite-id name="id" class="model.entidades.BancaLocalId">
+            <key-property name="idLocal" type="int">
+                <column name="id_Local" />
+            </key-property>
+            <key-property name="idBanca" type="int">
+                <column name="id_Banca" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="banca" class="model.entidades.Banca" update="false" insert="false" fetch="select">
+            <column name="id_Banca" not-null="true" />
+        </many-to-one>
+        <many-to-one name="localizacao" class="model.entidades.Localizacao" update="false" insert="false" fetch="select">
+            <column name="id_Local" not-null="true" />
+        </many-to-one>
+        <property name="dataInstalacao" type="date">
+            <column name="dataInstalacao" length="10" />
+        </property>
+        <property name="dataRemocao" type="date">
+            <column name="dataRemocao" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

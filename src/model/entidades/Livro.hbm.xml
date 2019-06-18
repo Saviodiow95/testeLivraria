@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/06/2019 15:29:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.entidades.Livro" table="livro" catalog="livraria" optimistic-lock="version">
+        <id name="idLivro" type="java.lang.Integer">
+            <column name="idLivro" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="editora" class="model.entidades.Editora" fetch="select">
+            <column name="id_Editora" not-null="true" />
+        </many-to-one>
+        <property name="titulo" type="string">
+            <column name="Titulo" length="100" not-null="true" />
+        </property>
+        <property name="isbn" type="string">
+            <column name="ISBN" length="100" not-null="true" />
+        </property>
+        <property name="cdBarras" type="string">
+            <column name="cdBarras" length="100" />
+        </property>
+        <set name="exemplars" table="exemplar" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Livro_idLivro" not-null="true" />
+            </key>
+            <one-to-many class="model.entidades.Exemplar" />
+        </set>
+        <set name="autors" table="livro_autor" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_Livro" not-null="true" />
+            </key>
+            <many-to-many entity-name="model.entidades.Autor">
+                <column name="id_Autor" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="categorias" table="livro_categoria" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_Livro" not-null="true" />
+            </key>
+            <many-to-many entity-name="model.entidades.Categoria">
+                <column name="id_Categoria" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

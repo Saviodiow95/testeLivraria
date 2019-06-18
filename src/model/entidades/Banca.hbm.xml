@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/06/2019 15:29:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.entidades.Banca" table="banca" catalog="livraria" optimistic-lock="version">
+        <id name="idBanca" type="java.lang.Integer">
+            <column name="idBanca" />
+            <generator class="identity" />
+        </id>
+        <property name="descricao" type="string">
+            <column name="descricao" not-null="true" />
+        </property>
+        <set name="bancaLocals" table="banca_local" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_Banca" not-null="true" />
+            </key>
+            <one-to-many class="model.entidades.BancaLocal" />
+        </set>
+        <set name="emprestimos" table="emprestimo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Banca_idBanca" not-null="true" />
+            </key>
+            <one-to-many class="model.entidades.Emprestimo" />
+        </set>
+        <set name="emprestimos_1" table="emprestimo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Banca_idBanca" not-null="true" />
+            </key>
+            <one-to-many class="model.entidades.Emprestimo" />
+        </set>
+        <set name="exemplars" table="exemplar" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Banca_idBanca" not-null="true" />
+            </key>
+            <one-to-many class="model.entidades.Exemplar" />
+        </set>
+    </class>
+</hibernate-mapping>

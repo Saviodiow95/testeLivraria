@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/06/2019 15:29:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.entidades.Responsavel" table="responsavel" catalog="livraria" optimistic-lock="version">
+        <id name="idResponsavel" type="java.lang.Integer">
+            <column name="idResponsavel" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" />
+        </property>
+        <set name="localizacaos" table="localizacao" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_Responsavel" not-null="true" />
+            </key>
+            <one-to-many class="model.entidades.Localizacao" />
+        </set>
+    </class>
+</hibernate-mapping>
